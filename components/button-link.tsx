@@ -1,12 +1,18 @@
 import Link from "next/link";
 
+export type ButtonLinkVariant =
+  | "primary"
+  | "secondary"
+  | "light"
+  | "dark-outline";
+
 type ButtonLinkProps = {
   href: string;
   label: string;
-  variant?: "primary" | "secondary" | "light" | "dark-outline";
+  variant?: ButtonLinkVariant;
 };
 
-const variants = {
+export const buttonLinkVariants = {
   primary:
     "bg-[var(--surface-strong)] text-[#f3ede5] hover:-translate-y-0.5 hover:bg-[var(--surface-muted)]",
   secondary:
@@ -22,11 +28,21 @@ export function ButtonLink({
   label,
   variant = "primary",
 }: ButtonLinkProps) {
-  const className = `inline-flex min-h-11 items-center justify-center rounded-full px-5 py-3 text-center text-sm font-semibold shadow-[0_14px_34px_rgba(31,38,43,0.08)] transition focus-visible:outline-none sm:whitespace-nowrap ${variants[variant]}`;
+  const className = `inline-flex min-h-11 items-center justify-center rounded-full px-5 py-3 text-center text-sm font-semibold shadow-[0_14px_34px_rgba(31,38,43,0.08)] transition focus-visible:outline-none sm:whitespace-nowrap ${buttonLinkVariants[variant]}`;
 
-  if (href.startsWith("#")) {
+  if (
+    href.startsWith("#") ||
+    href.startsWith("http") ||
+    href.startsWith("mailto:") ||
+    href.startsWith("tel:")
+  ) {
     return (
-      <a href={href} className={className}>
+      <a
+        href={href}
+        className={className}
+        target={href.startsWith("http") ? "_blank" : undefined}
+        rel={href.startsWith("http") ? "noreferrer" : undefined}
+      >
         {label}
       </a>
     );

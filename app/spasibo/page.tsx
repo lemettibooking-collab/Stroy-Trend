@@ -1,9 +1,20 @@
 import Link from "next/link";
 
+import { ButtonLink } from "@/components/button-link";
 import { Container } from "@/components/container";
+import { buildPageMetadata, siteConfig } from "@/lib/site-config";
 
 export const metadata = {
-  title: "Спасибо за заявку",
+  ...buildPageMetadata({
+    title: "Спасибо за заявку",
+    description:
+      "Подтверждение получения заявки на аутсорс смет, исполнительной документации или поддержку ПТО.",
+    path: "/spasibo",
+  }),
+  robots: {
+    index: false,
+    follow: false,
+  },
 };
 
 export default function ThanksPage() {
@@ -26,6 +37,11 @@ export default function ThanksPage() {
             >
               Вернуться на главную
             </Link>
+            <ButtonLink
+              href={siteConfig.telegramContactUrl || "/#contacts"}
+              label="Перейти в Telegram"
+              variant="secondary"
+            />
             <Link
               href="/#services"
               className="inline-flex items-center justify-center rounded-full border border-[var(--border)] px-6 py-3 text-sm font-semibold text-[var(--text)] transition hover:border-[var(--accent)]"
