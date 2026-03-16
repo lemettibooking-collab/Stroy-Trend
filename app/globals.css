@@ -75,6 +75,62 @@ textarea {
   isolation: isolate;
 }
 
+.page-content-layer {
+  position: relative;
+  z-index: 1;
+}
+
+.page-scene-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.page-scene-layer::after {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at top left, rgba(255, 255, 255, 0.44), transparent 34%),
+    linear-gradient(180deg, rgba(245, 239, 230, 0.04) 0%, rgba(245, 239, 230, 0.28) 54%, rgba(245, 239, 230, 0.42) 100%);
+  content: "";
+}
+
+.page-scene-canvas {
+  height: 100%;
+  width: 100%;
+  opacity: 0.76;
+}
+
+.scene-fallback {
+  position: absolute;
+  inset: 0;
+  opacity: 0.8;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.34) 0%, rgba(226, 232, 236, 0.14) 36%, transparent 100%),
+    linear-gradient(rgba(122, 133, 142, 0.11) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(122, 133, 142, 0.11) 1px, transparent 1px),
+    linear-gradient(rgba(144, 154, 163, 0.14) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(144, 154, 163, 0.14) 1px, transparent 1px),
+    linear-gradient(90deg, transparent 12%, rgba(139, 149, 157, 0.2) 12%, rgba(139, 149, 157, 0.2) 12.4%, transparent 12.4%),
+    linear-gradient(90deg, transparent 52%, rgba(139, 149, 157, 0.18) 52%, rgba(139, 149, 157, 0.18) 52.35%, transparent 52.35%),
+    linear-gradient(0deg, transparent 62%, rgba(156, 110, 96, 0.08) 62%, rgba(156, 110, 96, 0.08) 62.45%, transparent 62.45%),
+    linear-gradient(116deg, rgba(115, 127, 136, 0.13) 0%, transparent 34%);
+  background-size:
+    auto,
+    72px 72px,
+    72px 72px,
+    18px 18px,
+    18px 18px,
+    auto,
+    auto,
+    auto,
+    auto;
+  transform: perspective(1480px) rotateX(67deg) translateY(-6%);
+  transform-origin: center top;
+}
+
 .page-shell::before {
   position: absolute;
   inset: 0;
@@ -83,7 +139,7 @@ textarea {
     linear-gradient(rgba(255, 255, 255, 0.28) 1px, transparent 1px),
     linear-gradient(90deg, rgba(255, 255, 255, 0.28) 1px, transparent 1px);
   background-size: 80px 80px;
-  opacity: 0.22;
+  opacity: 0.12;
   content: "";
   pointer-events: none;
 }
@@ -253,6 +309,26 @@ select:focus-visible {
 }
 
 @media (max-width: 767px) {
+  .page-scene-layer::after {
+    background:
+      radial-gradient(circle at top left, rgba(255, 255, 255, 0.38), transparent 24%),
+      linear-gradient(180deg, rgba(245, 239, 230, 0.16) 0%, rgba(245, 239, 230, 0.4) 100%);
+  }
+
+  .scene-fallback {
+    background-size:
+      auto,
+      48px 48px,
+      48px 48px,
+      12px 12px,
+      12px 12px,
+      auto,
+      auto,
+      auto,
+      auto;
+    transform: perspective(1100px) rotateX(69deg) translateY(-3%);
+  }
+
   .page-shell::before {
     background-size: 52px 52px;
   }

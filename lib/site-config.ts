@@ -5,6 +5,10 @@ function trimTrailingSlash(value: string) {
 }
 
 const fallbackSiteUrl = "http://localhost:3000";
+const fallbackPhoneHref = "tel:+79991402795";
+const fallbackPhoneDisplay = "8 (999) 140-27-95";
+const fallbackEmailHref = "mailto:stroytrend.org@mail.ru";
+const fallbackEmailDisplay = "stroytrend.org@mail.ru";
 
 export const siteConfig = {
   name: "Строй Тренд",
@@ -15,8 +19,11 @@ export const siteConfig = {
   ),
   ogImagePath: "/icon.svg",
   telegramContactUrl: process.env.NEXT_PUBLIC_TELEGRAM_CONTACT_URL || "",
-  phoneHref: process.env.NEXT_PUBLIC_PHONE_HREF || "",
-  phoneDisplay: process.env.NEXT_PUBLIC_PHONE_DISPLAY || "",
+  phoneHref: process.env.NEXT_PUBLIC_PHONE_HREF || fallbackPhoneHref,
+  phoneDisplay: process.env.NEXT_PUBLIC_PHONE_DISPLAY || fallbackPhoneDisplay,
+  emailHref: process.env.NEXT_PUBLIC_EMAIL_HREF || fallbackEmailHref,
+  emailDisplay:
+    process.env.NEXT_PUBLIC_EMAIL_DISPLAY || fallbackEmailDisplay,
 };
 
 type PageMetadataInput = {

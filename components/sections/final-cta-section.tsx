@@ -29,7 +29,7 @@ export function FinalCtaSection({ content }: FinalCtaSectionProps) {
                 <ButtonLink
                   href={content.primaryCta.href}
                   label={content.primaryCta.label}
-                  variant="light"
+                  variant="light-filled"
                 />
                 <ButtonLink
                   href={content.secondaryCta.href}

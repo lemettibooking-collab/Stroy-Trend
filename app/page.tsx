@@ -11,5 +11,5 @@ export const metadata: Metadata = buildPageMetadata({
 });
 
 export default function HomePage() {
-  return <LandingPage config={homePageContent} />;
+  return <LandingPage config={homePageContent} showAchievements showProjectCases />;
 }
