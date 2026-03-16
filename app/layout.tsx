@@ -1,14 +1,15 @@
 import type { Metadata } from "next";
+import { siteConfig } from "@/lib/site-config";
 
 import "./globals.css";
 
 export const metadata: Metadata = {
   title: {
     default: "Аутсорс смет, ИД и ПТО для строительных компаний | Строй Тренд",
-    template: "%s | Строй Тренд",
+    template: `%s | ${siteConfig.name}`,
   },
-  description:
-    "Строй Тренд: аутсорс смет, исполнительной документации и поддержки ПТО для подрядчиков, субподрядчиков и генподрядчиков. Быстрый первый контакт и понятный формат подключения.",
+  metadataBase: new URL(`${siteConfig.siteUrl}/`),
+  description: siteConfig.description,
   keywords: [
     "аутсорс смет",
     "исполнительная документация",
@@ -16,14 +17,14 @@ export const metadata: Metadata = {
     "сметчик на аутсорсе",
     "строительная документация",
   ],
-  applicationName: "Строй Тренд",
+  applicationName: siteConfig.name,
   openGraph: {
-    title: "Строй Тренд",
-    description:
-      "Аутсорс смет, исполнительной документации и поддержки ПТО для строительных компаний.",
+    title: siteConfig.name,
+    description: siteConfig.description,
     type: "website",
     locale: "ru_RU",
-    siteName: "Строй Тренд",
+    siteName: siteConfig.name,
+    images: [{ url: siteConfig.ogImagePath }],
   },
 };
 

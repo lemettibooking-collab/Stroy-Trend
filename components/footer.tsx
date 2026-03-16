@@ -1,6 +1,7 @@
 import { ButtonLink } from "@/components/button-link";
 import { Container } from "@/components/container";
 import type { FooterContent, NavigationItem } from "@/lib/site-content";
+import { siteConfig } from "@/lib/site-config";
 
 type FooterProps = {
   content: FooterContent;
@@ -33,9 +34,38 @@ export function Footer({ content, navigation }: FooterProps) {
             <p className="mt-4 max-w-2xl text-sm leading-6 text-[var(--text-muted)]">
               {content.placeholderNote}
             </p>
-            <address className="mt-5 not-italic text-sm leading-6 text-[var(--text-muted)]">
-              Контакты подключаются после согласования финальных данных.
-            </address>
+            {siteConfig.telegramContactUrl || siteConfig.phoneHref ? (
+              <address className="mt-5 not-italic text-sm leading-6 text-[var(--text-muted)]">
+                {siteConfig.telegramContactUrl ? (
+                  <p>
+                    Telegram:{" "}
+                    <a
+                      href={siteConfig.telegramContactUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="font-medium text-[var(--text)] transition hover:text-[var(--accent)]"
+                    >
+                      Перейти в контактный канал
+                    </a>
+                  </p>
+                ) : null}
+                {siteConfig.phoneHref && siteConfig.phoneDisplay ? (
+                  <p className="mt-2">
+                    Телефон:{" "}
+                    <a
+                      href={siteConfig.phoneHref}
+                      className="font-medium text-[var(--text)] transition hover:text-[var(--accent)]"
+                    >
+                      {siteConfig.phoneDisplay}
+                    </a>
+                  </p>
+                ) : null}
+              </address>
+            ) : (
+              <address className="mt-5 not-italic text-sm leading-6 text-[var(--text-muted)]">
+                Контакты подключаются после согласования финальных данных.
+              </address>
+            )}
             <div className="mt-6 flex flex-col gap-3 sm:flex-row">
               {content.contactCtas.map((item, index) => (
                 <ButtonLink

@@ -1,11 +1,34 @@
+import { siteConfig } from "@/lib/site-config";
+
 export type NavigationItem = {
   label: string;
   href: string;
 };
 
-type Cta = {
+export type Cta = {
   label: string;
   href: string;
+};
+
+export type LandingSectionKey =
+  | "hero"
+  | "about"
+  | "services"
+  | "signals"
+  | "advantages"
+  | "formats"
+  | "estimation"
+  | "executiveDocs"
+  | "process"
+  | "audience"
+  | "cases"
+  | "faq"
+  | "lead"
+  | "finalCta";
+
+type PageSeo = {
+  title: string;
+  description: string;
 };
 
 export type HeroContent = {
@@ -124,11 +147,16 @@ export type LeadFormContent = {
   submitLabel: string;
   disclaimer: string;
   responseNote: string;
+  errorMessage: string;
   nextSteps: string[];
   quickCtas: Cta[];
   contactPoints: string[];
   placeholderNote: string;
   secondaryCta: string;
+  successTitle: string;
+  successText: string;
+  successNextStep: string;
+  successTelegramCta: Cta;
 };
 
 export type FinalCtaContent = {
@@ -147,7 +175,35 @@ export type FooterContent = {
   services: string[];
 };
 
-export const siteContent = {
+const telegramContactHref = siteConfig.telegramContactUrl || "#contacts";
+const phoneContactHref = siteConfig.phoneHref || "#lead";
+
+export type SiteContent = {
+  navigation: NavigationItem[];
+  hero: HeroContent;
+  about: AboutContent;
+  services: ServicesContent;
+  signals: SignalsContent;
+  advantages: AdvantagesContent;
+  formats: FormatsContent;
+  estimation: DetailSectionContent;
+  executiveDocs: DetailSectionContent;
+  process: ProcessContent;
+  audience: AudienceContent;
+  cases: CasesContent;
+  faq: FaqContent;
+  leadForm: LeadFormContent;
+  finalCta: FinalCtaContent;
+  footer: FooterContent;
+};
+
+export type LandingPageConfig = {
+  seo: PageSeo;
+  sections: LandingSectionKey[];
+  content: SiteContent;
+};
+
+export const siteContent: SiteContent = {
   navigation: [
     { label: "Услуги", href: "#services" },
     { label: "Формат", href: "#formats" },
@@ -176,11 +232,11 @@ export const siteContent = {
     quickCtas: [
       {
         label: "Запросить Telegram для связи",
-        href: "#lead",
+        href: telegramContactHref,
       },
       {
-        label: "Перейти к контактам",
-        href: "#contacts",
+        label: "Запросить звонок",
+        href: phoneContactHref,
       },
     ],
     primaryCta: {
@@ -514,9 +570,11 @@ export const siteContent = {
     serviceOptions: ["Сметы", "Исполнительная документация", "Поддержка ПТО", "Нужно обсудить комплексно"],
     submitLabel: "Получить обратную связь по задаче",
     disclaimer:
-      "Форма уже принимает обращения и ведёт на страницу подтверждения. Интеграция с CRM, рабочим email и Telegram добавляется перед запуском.",
+      "Заявка отправляется напрямую в рабочий канал обработки лидов. CRM и дополнительные маршруты можно подключить позже без смены интерфейса.",
     responseNote:
       "Если нужен быстрый канал, на первом ответе можно сразу согласовать Telegram или рабочий созвон.",
+    errorMessage:
+      "Не удалось отправить заявку с первого раза. Попробуйте ещё раз или оставьте запрос через контактную кнопку ниже.",
     nextSteps: [
       "Смотрим вводные по объекту и задаче",
       "Уточняем формат подключения и исходные",
@@ -539,8 +597,17 @@ export const siteContent = {
       "Какие исходные и шаблоны доступны на старте",
     ],
     placeholderNote:
-      "Телефон, email и Telegram в этой версии оставлены как управляемый placeholder до передачи утверждённых контактных данных. Структура страницы уже готова для быстрого подключения реальных каналов.",
+      "Контакты и основной канал связи подключаются через конфиг окружения, чтобы их можно было безопасно обновлять без правки вёрстки.",
     secondaryCta: "Сначала посмотреть FAQ",
+    successTitle: "Получили ваш запрос и уже зафиксировали задачу в работе.",
+    successText:
+      "Спасибо. Мы вернёмся с понятным следующим шагом в рабочее время и при необходимости сразу согласуем удобный канал связи.",
+    successNextStep:
+      "Если нужен быстрый контакт, можно сразу перейти в Telegram и продолжить диалог в удобном канале после получения заявки.",
+    successTelegramCta: {
+      label: "Запросить Telegram для связи",
+      href: telegramContactHref,
+    },
   } satisfies LeadFormContent,
   finalCta: {
     title: "Если задача уже горит, лучше обсудить её сейчас, чем собирать последствия перед дедлайном",
@@ -564,12 +631,12 @@ export const siteContent = {
       "Реквизиты, телефон, email и Telegram будут добавлены после согласования финальных контактных данных. Вся структура уже подготовлена так, чтобы это можно было сделать точечно через один контентный файл.",
     contactCtas: [
       {
-        label: "Оставить заявку",
-        href: "#lead",
+        label: "Запросить Telegram",
+        href: telegramContactHref,
       },
       {
-        label: "Запросить Telegram",
-        href: "#lead",
+        label: "Запросить звонок",
+        href: phoneContactHref,
       },
     ],
     contactLabels: [
@@ -579,4 +646,239 @@ export const siteContent = {
     ],
     services: ["Сметы на аутсорсе", "Исполнительная документация", "Поддержка ПТО"],
   } satisfies FooterContent,
+};
+
+export const homePageContent: LandingPageConfig = {
+  seo: {
+    title: "Аутсорс смет, ИД и ПТО для строительных компаний",
+    description:
+      "Строй Тренд: общий лендинг по аутсорсу смет, исполнительной документации и поддержке ПТО для подрядчиков и генподрядчиков.",
+  },
+  sections: [
+    "hero",
+    "about",
+    "services",
+    "signals",
+    "advantages",
+    "formats",
+    "estimation",
+    "executiveDocs",
+    "process",
+    "audience",
+    "cases",
+    "faq",
+    "lead",
+    "finalCta",
+  ],
+  content: siteContent,
+};
+
+export const smetyPageContent: LandingPageConfig = {
+  seo: {
+    title: "Аутсорс смет и сметчик без найма",
+    description:
+      "Подготовка, аудит и пересчёт смет на аутсорсе для строительных компаний. Усиление сметного блока без найма в штат.",
+  },
+  sections: [
+    "hero",
+    "signals",
+    "estimation",
+    "services",
+    "formats",
+    "advantages",
+    "process",
+    "cases",
+    "faq",
+    "lead",
+    "finalCta",
+  ],
+  content: {
+    ...siteContent,
+    hero: {
+      ...siteContent.hero,
+      eyebrow: "Аутсорс сметного направления",
+      title: "Сметчик на аутсорсе без найма в штат, когда расчёты нужно закрыть без задержек",
+      description:
+        "Подключаемся к подрядчикам и строительным компаниям, когда нужно подготовить сметы, пересчитать объёмы, провести аудит расчётов и быстро вернуть сметной части рабочий темп.",
+      highlights: [
+        "Подготовка, аудит и пересчёт смет",
+        "Под подключение без расширения штата",
+        "Полезно, когда свои ресурсы перегружены или не успевают по срокам",
+      ],
+      metrics: [
+        { label: "Что закрываем", value: "Подготовка смет, аудит расчётов и пересчёт по изменениям" },
+        { label: "Когда полезно", value: "Когда нужен внешний сметчик без найма и длительного онбординга" },
+        { label: "Результат", value: "Сметная часть снова поддерживает задачу, а не тормозит согласование" },
+      ],
+      primaryCta: {
+        label: "Оставить запрос по сметам",
+        href: "#lead",
+      },
+      secondaryCta: {
+        label: "Посмотреть сметный блок",
+        href: "#estimation",
+      },
+    },
+    services: {
+      ...siteContent.services,
+      title: "Сметный аутсорс под расчёт, аудит и пересчёт без лишней перестройки процесса",
+      description:
+        "Фокус этой страницы — на задачах сметного блока. Остальные направления остаются доступными, если нужно усилить процесс комплексно.",
+    },
+    signals: {
+      ...siteContent.signals,
+      title: "Обычно нас подключают, когда сметная часть начинает задерживать движение проекта",
+      description:
+        "Ниже сигналы, что нужен внешний сметчик или сметный блок на аутсорсе без найма в штат.",
+      items: [
+        {
+          title: "Нужно срочно подготовить или пересчитать смету",
+          text: "Объёмы изменились, состав работ уточнился или расчёты нужны в короткий срок под согласование.",
+        },
+        {
+          title: "Есть сомнения по текущим расчётам",
+          text: "Нужен внешний аудит сметной части, чтобы убрать слабые места до следующего этапа согласования.",
+        },
+        {
+          title: "Свой сметчик перегружен или отсутствует",
+          text: "Штатный ресурс не успевает держать нужный ритм, а расширять команду под один период нагрузки нецелесообразно.",
+        },
+        {
+          title: "Нужен внешний расчётный контур",
+          text: "Важно быстро подключить сметную поддержку без долгого найма, обучения и организационной нагрузки.",
+        },
+      ],
+    },
+    estimation: {
+      ...siteContent.estimation,
+      title: "Подготовка, аудит и пересчёт смет в темпе, который нужен объекту",
+      description:
+        "Берём на себя расчётный контур, когда нужен внешний сметчик на аутсорсе: быстро подключиться, проверить текущую логику и выдать рабочий результат без лишней паузы на найм.",
+      note:
+        "Это особенно полезно, когда нужен сметчик без найма в штат, но с понятной зоной ответственности и предсказуемым результатом.",
+      cta: "Оставить запрос по сметной части",
+    },
+    leadForm: {
+      ...siteContent.leadForm,
+      title: "Опишите задачу по сметам, и мы предложим рабочий формат подключения",
+      formTitle: "Заявка на аутсорс смет или аудит расчётов",
+      formSupportingText:
+        "Подойдёт и короткое описание: что нужно посчитать, пересчитать или проверить, на какой стадии находится задача и какие сроки уже горят.",
+      successNextStep:
+        "Если нужно быстро перейти к следующему шагу, используйте Telegram CTA и зафиксируйте удобный формат общения по сметной задаче.",
+      successTelegramCta: {
+        label: "Запросить Telegram по сметам",
+        href: telegramContactHref,
+      },
+    },
+    finalCta: {
+      ...siteContent.finalCta,
+      title: "Если сметная часть тормозит согласование, лучше подключить внешний расчётный контур сейчас",
+      description:
+        "Подготовим, перепроверим или пересчитаем сметную часть и предложим формат, в котором можно закрыть задачу без срочного найма в штат.",
+    },
+  },
+};
+
+export const executiveDocsPageContent: LandingPageConfig = {
+  seo: {
+    title: "Аутсорс исполнительной документации и поддержка ПТО",
+    description:
+      "Исполнительная документация на аутсорсе, восстановление комплектов, поддержка ПТО и подготовка документов к сдаче этапов.",
+  },
+  sections: [
+    "hero",
+    "about",
+    "services",
+    "executiveDocs",
+    "signals",
+    "advantages",
+    "formats",
+    "process",
+    "cases",
+    "faq",
+    "lead",
+    "finalCta",
+  ],
+  content: {
+    ...siteContent,
+    hero: {
+      ...siteContent.hero,
+      eyebrow: "Исполнительная документация и ПТО на аутсорсе",
+      title:
+        "Исполнительная документация на аутсорсе, восстановление комплектов и поддержка ПТО перед сдачей этапов",
+      description:
+        "Подключаемся, когда документация отстаёт от площадки, нужно восстановить комплект, усилить ПТО или быстро довести документы до состояния, с которым можно спокойно выходить на сдачу.",
+      highlights: [
+        "Исполнительная документация и восстановление комплектов",
+        "Поддержка ПТО без расширения штатной команды",
+        "Подготовка документов перед сдачей этапов и закрытием объёмов",
+      ],
+      metrics: [
+        { label: "Фокус", value: "ИД, восстановление документов и аутсорс-поддержка ПТО" },
+        { label: "Когда подключаемся", value: "Когда документы отстают или этап уже близко к сдаче" },
+        { label: "Результат", value: "Документация собирается в рабочую систему и не срывает следующий шаг" },
+      ],
+      primaryCta: {
+        label: "Оставить запрос по ИД",
+        href: "#lead",
+      },
+      secondaryCta: {
+        label: "Посмотреть блок ИД и ПТО",
+        href: "#executive-docs",
+      },
+    },
+    signals: {
+      ...siteContent.signals,
+      title: "Обычно нас подключают, когда исполнительная документация уже начала отставать от реального темпа работ",
+      description:
+        "Ниже частые ситуации, в которых нужен внешний контур по ИД, восстановлению документов или поддержке ПТО.",
+      items: [
+        {
+          title: "Документация накопилась и требует восстановления",
+          text: "Нужно разобрать массив документов, собрать структуру и вернуть комплектам управляемое состояние.",
+        },
+        {
+          title: "Подходит сдача этапа или закрытие объёмов",
+          text: "Важно быстро довести ИД до состояния, с которым можно выходить на проверку и подготовку к сдаче.",
+        },
+        {
+          title: "Внутренний ПТО перегружен",
+          text: "Команда держит критичные задачи, но уже не успевает одинаково внимательно вести документацию по объекту.",
+        },
+        {
+          title: "Нужен внешний блок без длительного запуска",
+          text: "Важно быстро подключить поддержку ИД и ПТО без расширения штата и сложной административной настройки.",
+        },
+      ],
+    },
+    executiveDocs: {
+      ...siteContent.executiveDocs,
+      title: "Исполнительная документация и поддержка ПТО без аврала перед сдачей",
+      description:
+        "Берём в работу текущие и накопленные документы, помогаем восстановить массив ИД, поддерживаем ПТО и доводим комплект до состояния, с которым можно двигаться к сдаче спокойнее.",
+      note:
+        "Особенно полезно, когда нужно восстановить документацию, усилить ПТО на аутсорсе или быстро собрать комплект перед сдачей этапа.",
+      cta: "Обсудить ИД, восстановление и ПТО",
+    },
+    leadForm: {
+      ...siteContent.leadForm,
+      title: "Опишите задачу по исполнительной документации или ПТО",
+      formTitle: "Заявка на ИД, восстановление комплекта или поддержку ПТО",
+      formSupportingText:
+        "Достаточно коротко описать объект, степень готовности документации и насколько близко сдача этапа или проверка.",
+      successNextStep:
+        "Если хотите ускорить коммуникацию, используйте Telegram CTA для старта диалога по ИД или задачам ПТО.",
+      successTelegramCta: {
+        label: "Запросить Telegram по ИД",
+        href: telegramContactHref,
+      },
+    },
+    finalCta: {
+      ...siteContent.finalCta,
+      title: "Если ИД уже отстаёт или сдача близко, лучше подключить внешний контур до следующего аврала",
+      description:
+        "Поможем восстановить документацию, усилить ПТО и довести комплект до рабочего состояния в формате, который реально разгружает команду.",
+    },
+  },
 };
