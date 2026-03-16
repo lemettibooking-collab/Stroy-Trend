@@ -1,3 +1,5 @@
+import Image from "next/image";
+import Link from "next/link";
 import { ButtonLink } from "@/components/button-link";
 import { Container } from "@/components/container";
 import type { NavigationItem } from "@/lib/site-content";
@@ -11,19 +13,16 @@ export function SiteHeader({ navigation }: SiteHeaderProps) {
     <header className="sticky top-0 z-50 px-3 pt-2 sm:px-4 sm:pt-3">
       <Container>
         <div className="flex items-center justify-between gap-4 rounded-[1.6rem] border border-white/70 bg-[#f8f3eb]/86 px-4 py-3 shadow-[0_18px_40px_rgba(31,38,43,0.08)] backdrop-blur-xl md:px-5">
-          <a href="#top" className="flex min-w-0 items-center gap-3 rounded-2xl">
-            <span className="flex h-11 w-11 items-center justify-center rounded-2xl bg-[var(--surface-strong)] text-sm font-semibold uppercase tracking-[0.2em] text-[#f3ede5]">
-              ST
-            </span>
-            <span className="min-w-0">
-              <span className="block text-sm font-semibold uppercase tracking-[0.24em] text-[var(--accent)]">
-                Строй Тренд
-              </span>
-              <span className="mt-1 hidden truncate text-sm text-[var(--text-muted)] sm:block">
-                Сметы, ИД и поддержка ПТО для строительных компаний
-              </span>
-            </span>
-          </a>
+          <Link href="/" className="flex min-w-0 items-center rounded-2xl">
+            <Image
+              src="/logo files 2/stroy-trend-logo-transparent.png"
+              alt="Строй Тренд"
+              width={323}
+              height={119}
+              priority
+              className="h-auto w-[118px] sm:w-[132px] md:w-[146px] lg:w-[158px]"
+            />
+          </Link>
 
           <nav
             aria-label="Основная навигация"
@@ -42,11 +41,11 @@ export function SiteHeader({ navigation }: SiteHeaderProps) {
 
           <div className="hidden items-center gap-3 md:flex">
             <ButtonLink href="#services" label="Услуги" variant="secondary" />
-            <ButtonLink href="#lead" label="Оставить заявку" />
+            <ButtonLink href="#lead" label="Оставить заявку" variant="dark-filled" />
           </div>
 
           <div className="md:hidden">
-            <ButtonLink href="#lead" label="Заявка" />
+            <ButtonLink href="#lead" label="Заявка" variant="dark-filled" />
           </div>
         </div>
       </Container>

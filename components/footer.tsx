@@ -1,3 +1,5 @@
+import Image from "next/image";
+import Link from "next/link";
 import { ButtonLink } from "@/components/button-link";
 import { Container } from "@/components/container";
 import type { FooterContent, NavigationItem } from "@/lib/site-content";
@@ -14,11 +16,16 @@ export function Footer({ content, navigation }: FooterProps) {
       <Container>
         <div className="surface-card grid gap-8 rounded-[2rem] p-8 md:grid-cols-[1.2fr_0.8fr] md:p-10">
           <section aria-labelledby="footer-brand">
-            <h2
-              id="footer-brand"
-              className="text-sm font-semibold uppercase tracking-[0.24em] text-[var(--accent)]"
-            >
-              Строй Тренд
+            <h2 id="footer-brand">
+              <Link href="/" className="inline-flex rounded-2xl">
+                <Image
+                  src="/logo files 2/stroy-trend-logo-transparent.png"
+                  alt="Логотип Строй Тренд"
+                  width={323}
+                  height={119}
+                  className="h-auto w-[164px] sm:w-[188px]"
+                />
+              </Link>
             </h2>
             <p className="mt-4 max-w-2xl text-lg leading-8 text-[var(--text)]">
               {content.description}
@@ -31,41 +38,45 @@ export function Footer({ content, navigation }: FooterProps) {
                 <li key={item}>{item}</li>
               ))}
             </ul>
-            <p className="mt-4 max-w-2xl text-sm leading-6 text-[var(--text-muted)]">
-              {content.placeholderNote}
-            </p>
-            {siteConfig.telegramContactUrl || siteConfig.phoneHref ? (
-              <address className="mt-5 not-italic text-sm leading-6 text-[var(--text-muted)]">
-                {siteConfig.telegramContactUrl ? (
-                  <p>
-                    Telegram:{" "}
-                    <a
-                      href={siteConfig.telegramContactUrl}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="font-medium text-[var(--text)] transition hover:text-[var(--accent)]"
-                    >
-                      Перейти в контактный канал
-                    </a>
+            <address className="mt-5 not-italic">
+              <div className="grid gap-4 text-sm leading-6 text-[var(--text-muted)] sm:max-w-md sm:grid-cols-2">
+                <div>
+                  <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--accent)]">
+                    Телефон
                   </p>
-                ) : null}
-                {siteConfig.phoneHref && siteConfig.phoneDisplay ? (
-                  <p className="mt-2">
-                    Телефон:{" "}
-                    <a
-                      href={siteConfig.phoneHref}
-                      className="font-medium text-[var(--text)] transition hover:text-[var(--accent)]"
-                    >
-                      {siteConfig.phoneDisplay}
-                    </a>
+                  <a
+                    href={siteConfig.phoneHref}
+                    className="mt-2 inline-flex font-medium text-[var(--text)] transition hover:text-[var(--accent)]"
+                  >
+                    {siteConfig.phoneDisplay}
+                  </a>
+                </div>
+                <div>
+                  <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--accent)]">
+                    Email
                   </p>
-                ) : null}
-              </address>
-            ) : (
-              <address className="mt-5 not-italic text-sm leading-6 text-[var(--text-muted)]">
-                Контакты подключаются после согласования финальных данных.
-              </address>
-            )}
+                  <a
+                    href={siteConfig.emailHref}
+                    className="mt-2 inline-flex break-all font-medium text-[var(--text)] transition hover:text-[var(--accent)]"
+                  >
+                    {siteConfig.emailDisplay}
+                  </a>
+                </div>
+              </div>
+              {siteConfig.telegramContactUrl ? (
+                <p className="mt-4 text-sm leading-6 text-[var(--text-muted)]">
+                  Telegram:{" "}
+                  <a
+                    href={siteConfig.telegramContactUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="font-medium text-[var(--text)] transition hover:text-[var(--accent)]"
+                  >
+                    Перейти в контактный канал
+                  </a>
+                </p>
+              ) : null}
+            </address>
             <div className="mt-6 flex flex-col gap-3 sm:flex-row">
               {content.contactCtas.map((item, index) => (
                 <ButtonLink

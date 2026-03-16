@@ -1,6 +1,8 @@
 import Link from "next/link";
 
 export type ButtonLinkVariant =
+  | "dark-filled"
+  | "light-filled"
   | "primary"
   | "secondary"
   | "light"
@@ -12,13 +14,19 @@ type ButtonLinkProps = {
   variant?: ButtonLinkVariant;
 };
 
+const darkFilledButtonClasses =
+  "bg-[var(--surface-strong)] !text-[#f8f4ee] opacity-100 hover:-translate-y-0.5 hover:bg-[var(--surface-muted)] hover:!text-white focus-visible:!text-white";
+
+const lightFilledButtonClasses =
+  "bg-[#f3ede5] !text-[var(--surface-strong)] opacity-100 hover:-translate-y-0.5 hover:bg-white hover:!text-[var(--surface-strong)] focus-visible:!text-[var(--surface-strong)]";
+
 export const buttonLinkVariants = {
-  primary:
-    "bg-[var(--surface-strong)] text-[#f3ede5] hover:-translate-y-0.5 hover:bg-[var(--surface-muted)]",
+  "dark-filled": darkFilledButtonClasses,
+  "light-filled": lightFilledButtonClasses,
+  primary: darkFilledButtonClasses,
   secondary:
     "border border-[var(--border)] text-[var(--text)] hover:-translate-y-0.5 hover:border-[var(--accent)] hover:text-[var(--accent)]",
-  light:
-    "bg-[#f3ede5] text-[var(--surface-strong)] hover:-translate-y-0.5 hover:bg-white",
+  light: lightFilledButtonClasses,
   "dark-outline":
     "border border-white/15 text-[#f3ede5] hover:-translate-y-0.5 hover:border-[#d3b28a] hover:text-[#d3b28a]",
 };
