@@ -141,14 +141,11 @@ export function LeadFormPanel({ content }: LeadFormPanelProps) {
             name="name"
             placeholder="Как к вам обратиться"
             autoComplete="name"
-            aria-describedby="lead-name-note lead-name-error"
+            aria-describedby="lead-name-error"
             aria-invalid={status === "error" ? "true" : "false"}
             disabled={isSubmitting}
             required
           />
-          <p id="lead-name-note" className="mt-2 text-xs leading-5 text-[var(--text-muted)]">
-            Достаточно имени или роли, по которой удобно вернуться с ответом.
-          </p>
           <p id="lead-name-error" className="sr-only">
             Поле для будущего текста ошибки.
           </p>
@@ -164,14 +161,11 @@ export function LeadFormPanel({ content }: LeadFormPanelProps) {
             name="phone"
             placeholder="+7"
             autoComplete="tel"
-            aria-describedby="lead-phone-note lead-phone-error"
+            aria-describedby="lead-phone-error"
             aria-invalid={status === "error" ? "true" : "false"}
             disabled={isSubmitting}
             required
           />
-          <p id="lead-phone-note" className="mt-2 text-xs leading-5 text-[var(--text-muted)]">
-            Используем только для первичного контакта по вашей задаче.
-          </p>
           <p id="lead-phone-error" className="sr-only">
             Поле для будущего текста ошибки.
           </p>
@@ -190,12 +184,8 @@ export function LeadFormPanel({ content }: LeadFormPanelProps) {
             name="project"
             placeholder="Объект, площадка или внутреннее название проекта"
             autoComplete="organization-title"
-            aria-describedby="lead-project-note"
             disabled={isSubmitting}
           />
-          <p id="lead-project-note" className="mt-2 text-xs leading-5 text-[var(--text-muted)]">
-            Помогает быстрее понять контекст и формат подключения.
-          </p>
         </label>
       </div>
 
@@ -210,12 +200,8 @@ export function LeadFormPanel({ content }: LeadFormPanelProps) {
             type="text"
             name="deadline"
             placeholder="Например: до конца недели или к сдаче этапа"
-            aria-describedby="lead-deadline-note"
             disabled={isSubmitting}
           />
-          <p id="lead-deadline-note" className="mt-2 text-xs leading-5 text-[var(--text-muted)]">
-            Помогает сразу оценить срочность подключения.
-          </p>
         </label>
         <label className="block">
           <span className="mb-2 block text-sm font-medium text-[var(--text)]">
@@ -227,12 +213,8 @@ export function LeadFormPanel({ content }: LeadFormPanelProps) {
             type="text"
             name="materials"
             placeholder="Сметы, шаблоны, журналы, реестры, исходные данные"
-            aria-describedby="lead-materials-note"
             disabled={isSubmitting}
           />
-          <p id="lead-materials-note" className="mt-2 text-xs leading-5 text-[var(--text-muted)]">
-            Если есть исходные, это ускоряет первый рабочий шаг.
-          </p>
         </label>
       </div>
 
@@ -245,14 +227,11 @@ export function LeadFormPanel({ content }: LeadFormPanelProps) {
           className="field min-h-36 resize-y"
           name="task"
           placeholder="Какой объект, какая стадия, что нужно закрыть и в какие сроки"
-          aria-describedby="lead-task-note lead-task-error"
+          aria-describedby="lead-task-error"
           aria-invalid={status === "error" ? "true" : "false"}
           disabled={isSubmitting}
           required
         />
-        <p id="lead-task-note" className="mt-2 text-xs leading-5 text-[var(--text-muted)]">
-          Можно в свободной форме: объект, стадия, направление работ и критичный срок.
-        </p>
         <p id="lead-task-error" className="sr-only">
           Поле для будущего текста ошибки.
         </p>
