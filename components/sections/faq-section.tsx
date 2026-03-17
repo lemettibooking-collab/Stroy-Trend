@@ -32,7 +32,7 @@ export function FaqSection({ content }: FaqSectionProps) {
       </div>
       <div className="mt-6 rounded-[1.5rem] border border-[var(--border)] bg-white/52 p-4 sm:inline-flex sm:p-5">
         <div className="flex flex-col gap-3 sm:flex-row">
-          <ButtonLink href="#lead" label="Оставить заявку" />
+          <ButtonLink href="#lead-form" label="Оставить заявку" />
           <ButtonLink href="#services" label="Посмотреть услуги" variant="secondary" />
         </div>
       </div>

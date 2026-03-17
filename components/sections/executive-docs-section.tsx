@@ -47,7 +47,7 @@ export function ExecutiveDocsSection({ content }: ExecutiveDocsSectionProps) {
           </ul>
           <p className="mt-6 text-sm leading-7 text-[var(--text)]">{content.note}</p>
           <div className="mt-8">
-            <ButtonLink href="#lead" label={content.cta} variant="secondary" />
+            <ButtonLink href="#lead-form" label={content.cta} variant="secondary" />
           </div>
         </div>
       </div>

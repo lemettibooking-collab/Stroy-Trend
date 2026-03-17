@@ -237,12 +237,12 @@ export const siteContent: SiteContent = {
       },
       {
         label: "Оставить заявку",
-        href: "#contacts",
+        href: "#lead-form",
       },
     ],
     primaryCta: {
       label: "Оставить заявку",
-      href: "#lead",
+      href: "#lead-form",
     },
     secondaryCta: {
       label: "Написать в Telegram",
@@ -628,7 +628,7 @@ export const siteContent: SiteContent = {
       },
       {
         label: "Оставить заявку",
-        href: "#contacts",
+        href: "#lead-form",
       },
     ],
     contactPoints: [
@@ -656,7 +656,7 @@ export const siteContent: SiteContent = {
       "Можно начать с одной задачи, отдельного раздела или сразу обсудить сопровождение по объекту.",
     primaryCta: {
       label: "Оставить заявку",
-      href: "#lead",
+      href: "#lead-form",
     },
     secondaryCta: {
       label: "Написать в Telegram",
@@ -673,7 +673,7 @@ export const siteContent: SiteContent = {
     contactCtas: [
       {
         label: "Оставить заявку",
-        href: "#contacts",
+        href: "#lead-form",
       },
       {
         label: "Telegram",
@@ -769,7 +769,7 @@ export const smetyPageContent: LandingPageConfig = {
       ],
       primaryCta: {
         label: "Оставить заявку по сметам",
-        href: "#lead",
+        href: "#lead-form",
       },
       secondaryCta: {
         label: "Написать в Telegram",
@@ -993,7 +993,7 @@ export const smetyPageContent: LandingPageConfig = {
         "Можно начать с одной сметы, проверки, пересчета или обсудить регулярное сопровождение.",
       primaryCta: {
         label: "Оставить заявку по сметам",
-        href: "#lead",
+        href: "#lead-form",
       },
       secondaryCta: {
         label: "Написать в Telegram",
@@ -1047,7 +1047,7 @@ export const executiveDocsPageContent: LandingPageConfig = {
       quickCtas: [
         {
           label: "Оставить заявку",
-          href: "#contacts",
+          href: "#lead-form",
         },
         {
           label: "Написать в Telegram",
@@ -1056,7 +1056,7 @@ export const executiveDocsPageContent: LandingPageConfig = {
       ],
       primaryCta: {
         label: "Оставить заявку по ИД",
-        href: "#lead",
+        href: "#lead-form",
       },
       secondaryCta: {
         label: "Написать в Telegram",
@@ -1280,7 +1280,7 @@ export const executiveDocsPageContent: LandingPageConfig = {
         "Можно начать с одного раздела, восстановления ИД или сразу обсудить сопровождение по объекту.",
       primaryCta: {
         label: "Оставить заявку по ИД",
-        href: "#lead",
+        href: "#lead-form",
       },
       secondaryCta: {
         label: "Написать в Telegram",

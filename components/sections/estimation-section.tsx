@@ -47,7 +47,7 @@ export function EstimationSection({ content }: EstimationSectionProps) {
           </ul>
           <p className="mt-6 text-sm leading-7 text-[#f3ede5]">{content.note}</p>
           <div className="mt-8">
-            <ButtonLink href="#lead" label={content.cta} variant="light" />
+            <ButtonLink href="#lead-form" label={content.cta} variant="light" />
           </div>
         </div>
       </div>

@@ -40,7 +40,7 @@ export function FormatsSection({ content }: FormatsSectionProps) {
         ))}
       </div>
       <div className="mt-8 rounded-[1.5rem] border border-[var(--border)] bg-white/50 p-4 sm:inline-flex sm:p-5">
-        <ButtonLink href="#lead" label={content.cta} />
+        <ButtonLink href="#lead-form" label={content.cta} />
       </div>
     </SectionShell>
   );

@@ -11,7 +11,7 @@ type LeadSectionProps = {
 export function LeadSection({ content }: LeadSectionProps) {
   return (
     <SectionShell
-      id="lead"
+      id="lead-form"
       eyebrow={content.eyebrow}
       title={content.title}
       description={content.description}
