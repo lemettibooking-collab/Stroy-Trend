@@ -31,7 +31,7 @@ export function LeadFormPanel({ content }: LeadFormPanelProps) {
       | { ok?: boolean; error?: string }
       | null;
 
-    if (!response.ok || !payload?.ok) {
+    if (!response.ok || payload?.ok === false) {
       throw new Error(payload?.error || content.errorMessage);
     }
   }
@@ -42,12 +42,13 @@ export function LeadFormPanel({ content }: LeadFormPanelProps) {
     setStatus("submitting");
     setErrorMessage("");
 
-    const formData = new FormData(event.currentTarget);
+    const form = event.currentTarget;
+    const formData = new FormData(form);
 
     try {
       await handleSubmit(formData);
+      form.reset();
       setStatus("success");
-      event.currentTarget.reset();
     } catch (error) {
       setStatus("error");
       setErrorMessage(
