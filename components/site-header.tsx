@@ -41,11 +41,11 @@ export function SiteHeader({ navigation }: SiteHeaderProps) {
 
           <div className="hidden items-center gap-3 md:flex">
             <ButtonLink href="#services" label="Услуги" variant="secondary" />
-            <ButtonLink href="#lead" label="Оставить заявку" variant="dark-filled" />
+            <ButtonLink href="#lead-form" label="Оставить заявку" variant="dark-filled" />
           </div>
 
           <div className="md:hidden">
-            <ButtonLink href="#lead" label="Заявка" variant="dark-filled" />
+            <ButtonLink href="#lead-form" label="Заявка" variant="dark-filled" />
           </div>
         </div>
       </Container>
