@@ -2,6 +2,7 @@ import { ButtonLink } from "@/components/button-link";
 import { SectionShell } from "@/components/section-shell";
 import { LeadFormPanel } from "@/components/sections/lead-form-panel";
 import type { LeadFormContent } from "@/lib/site-content";
+import { siteConfig } from "@/lib/site-config";
 
 type LeadSectionProps = {
   content: LeadFormContent;
@@ -33,7 +34,29 @@ export function LeadSection({ content }: LeadSectionProps) {
             ))}
           </ul>
           <div className="mt-8 rounded-[1.5rem] border border-white/10 bg-white/5 p-5">
-            <p className="text-sm leading-7 text-[#f3ede5]">{content.placeholderNote}</p>
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#c8b59c]">
+              Контакты
+            </p>
+            <address className="mt-4 not-italic space-y-4 text-sm leading-7 text-[#d6cec2]">
+              <div>
+                <p className="text-[#f3ede5]">Телефон</p>
+                <a
+                  href={siteConfig.phoneHref}
+                  className="font-medium text-[#f3ede5] transition hover:text-[#d9c3a3]"
+                >
+                  {siteConfig.phoneDisplay}
+                </a>
+              </div>
+              <div>
+                <p className="text-[#f3ede5]">Email</p>
+                <a
+                  href={siteConfig.emailHref}
+                  className="break-all font-medium text-[#f3ede5] transition hover:text-[#d9c3a3]"
+                >
+                  {siteConfig.emailDisplay}
+                </a>
+              </div>
+            </address>
           </div>
           <div className="mt-8 rounded-[1.5rem] border border-white/10 bg-white/5 p-5">
             <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#c8b59c]">
